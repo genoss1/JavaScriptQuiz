@@ -1,0 +1,57 @@
+openapi: 3.0.3
+info:
+  title: JavaScriptQuiz
+  description: localhost:8080
+  version: 1.0.0
+tags:
+  - name: Players
+paths:
+  /player:
+    get:
+      tags:
+        - Players
+      summary: Get all players with points
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Player name
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        "500":
+          description: Internal error
+    post:
+      tags:
+        - Players
+      summary: Add a player to the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Player"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        "500":
+          description: Internal error
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        name:
+          type: string
+        points:
+          type: number
